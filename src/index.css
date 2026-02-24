@@ -1,0 +1,141 @@
+:root {
+  --primary: #6e4555;
+  --secondary: #d282a6;
+  --accent: #e8b4bc;
+  --background: #f5e3e0;
+  --text: #3a3238;
+  --gradient-bg: linear-gradient(135deg, #fbe3e8 20%, #5cbdb9 100%, #ebf6f5 30%);
+
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #fbe3e8 20%, #5cbdb9 100%, #ebf6f5 30%);
+}
+
+.primaryBg{
+  background: var(--primary);
+  color: var(--background);
+}
+/* Primary Button */
+.primaryBtn {
+  background-color: #6e4555;
+  color: #f5e3e0;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+   margin-left: 5px;
+}
+
+.primaryBtn:hover {
+ background-color: #d282a6;
+}
+.secondaryBtn:hover{
+   background-color: #6e4555;
+}
+
+/* Secondary Button */
+.secondaryBtn {
+  background-color: #d282a6;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+.outlineBtn{
+  /* border: 1px solid var(--accent); */
+  border: 1px solid white;
+ background-color: var(--primary);
+  padding: 10px 20px;
+  color: var(--accent);
+  color: white;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+
+
+li {
+  list-style: none;
+}
+.social-icons img {
+  margin: 10px;
+}
+.steps img {
+  border-radius: 50%;
+}
+/* From Uiverse.io by Cornerstone-04 */
+.myCards {
+  perspective: 500px;
+}
+
+.myCard {
+  width: 200px;
+  height: 400px;
+  color: #fff;
+  background: #16161d;
+  border: 2px solid #555555;
+  border-radius: 4px;
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.5s;
+  padding: 20px;
+}
+
+.myCard:hover {
+  transform: translateZ(10px) rotateX(20deg) rotateY(20deg);
+}
+
+.myCard:hover .card_title {
+  transform: translateZ(50px);
+  color: #fff;
+}
+
+
+/* Login page */
+.page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: var(--primary); */
+    background: linear-gradient(135deg, #fbe3e8 20%, #5cbdb9 100%, #ebf6f5 30%);
+
+  height: 100vh;
+  color: var(--background);
+}
+/* .box{
+  width: 400px;
+  background-color: white;
+  opacity: 1.0;
+  padding: 40px 30px;
+  border-radius: 5px;
+  height: 500px;
+
+} */
+
+.box {
+  width: 400px;
+  height: 500px;
+  padding: 40px 30px;
+  border-radius: 12px;
+
+  /* Glass effect */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  /* Optional polish */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+
+
+.myCenter{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* padding-top: 20%; */
+  
+}
