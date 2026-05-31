@@ -1,44 +1,38 @@
 import React, { useState } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Signin = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const [error, setError] = useState(null);
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
 
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
 
-    // 1️⃣ Send login request to backend
-    fetch("http://localhost:8080/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((response) => response.text())
-      .then((msg) => {
-        alert(msg);
-
-        if (msg === "Login Successful") {
-          console.log("Logged in user:", user);
-          navigate("/");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Server error");
-      });
+    try {
+      const result = await login(user);
+      if (result.token) {
+        const nextRoute = result.user.role === "brand" ? "/branddashboard" : result.user.role === "influencer" ? "/influencerdashboard" : "/";
+        navigate(nextRoute);
+      } else {
+        setError(result.msg || "Login failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Server error");
+    }
   };
 
   return (
@@ -48,13 +42,17 @@ const Signin = () => {
           <div className="box">
             <h1 className="text-center">Login </h1>
             <div className="boxes text-center">
-              <button className="secondaryBtn">Brand</button>
-              <button className="secondaryBtn">Influncer</button>
+              <button type="button" className="secondaryBtn" disabled>
+                Brand
+              </button>
+              <button type="button" className="secondaryBtn" disabled>
+                Influencer
+              </button>
             </div>
 
             <form onSubmit={handleSubmit}>
               <div className="form-group pt-4">
-                <label for="exampleInputEmail1">Email address</label>
+                <label htmlFor="exampleInputEmail1">Email address</label>
                 <input
                   type="email"
                   name="email"
@@ -71,7 +69,7 @@ const Signin = () => {
                 </small>
               </div>
               <div className="form-group pt-4">
-                <label for="exampleInputPassword1">Password</label>
+                <label htmlFor="exampleInputPassword1">Password</label>
                 <input
                   type="password"
                   name="password"
@@ -89,7 +87,7 @@ const Signin = () => {
                   className="form-check-input"
                   id="exampleCheck1"
                 />
-                <label className="form-check-label" for="exampleCheck1">
+                <label className="form-check-label" htmlFor="exampleCheck1">
                   Remember me
                 </label>
 
@@ -106,6 +104,7 @@ const Signin = () => {
               <button type="submit" className="secondaryBtn w-100">
                 Sign In
               </button>
+              {error && <div className="alert alert-danger mt-3">{error}</div>}
             </form>
           </div>
         </div>

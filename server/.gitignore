@@ -2,3 +2,7 @@ node_modules
 .env
 logs
 npm-debug.log
+
+
+# influencer@example.com  -> Test@123456
+# brand@example.com --> Test@123456

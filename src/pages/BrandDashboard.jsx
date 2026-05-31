@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import Navbar from './Navbar'
+import { useAuth } from '../context/AuthContext'
 import '../styles/BrandDashboard.css'
 
 const BrandDashboard = () => {
+  const { user } = useAuth();
   const [campaigns, setCampaigns] = useState([
     { id: 1, title: 'Summer Collection Launch', category: 'Fashion', status: 'Active', startDate: '2024-02-01', endDate: '2024-02-28', budget: '$5,000', influencers: 8 },
     { id: 2, title: 'Spring Fashion Week', category: 'Fashion', status: 'Active', startDate: '2024-02-05', endDate: '2024-03-15', budget: '$8,000', influencers: 12 },
@@ -44,9 +45,9 @@ const BrandDashboard = () => {
           <section className="welcome-section">
             <div className="welcome-content">
               <div className="brand-info">
-                <div className="brand-logo">N</div>
+                <div className="brand-logo">{user?.name?.charAt(0) || 'B'}</div>
                 <div className="brand-details">
-                  <h1>Nike Brand Co.</h1>
+                  <h1>{user?.name || 'Brand User'}</h1>
                   <p>Welcome back! Here's what's happening with your collaborations today.</p>
                 </div>
               </div>
